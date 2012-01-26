@@ -32,4 +32,9 @@ public class ArtistService {
         query.setMaxResults(PAGE_SIZE);
         return query.getResultList();
     }
+    
+    public Artist getById(final long id) {
+        return provider.get().find(Artist.class, id);
+    }
+
 }

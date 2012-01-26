@@ -22,11 +22,22 @@ public class ArtistResource {
     @GET
     @Path("/list/{page}")
     @Produces({ "application/x-javascript", MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public JSONWithPadding getUser(@PathParam("page") final int page,
+    public JSONWithPadding getArtists(@PathParam("page") final int page,
             @QueryParam("jsoncallback") @DefaultValue("fn") final String callback)
     {
         final List<Artist> artists = artistService.getPagedList(page);
         return new JSONWithPadding(new GenericEntity<List<Artist>>(artists) {
+        }, callback);
+    }
+
+    @GET
+    @Path("/{id}")
+    @Produces({ "application/x-javascript", MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    public JSONWithPadding getArtist(@PathParam("id") final long id,
+            @QueryParam("jsoncallback") @DefaultValue("fn") final String callback)
+    {
+        final Artist artist = artistService.getById(id);
+        return new JSONWithPadding(new GenericEntity<Artist>(artist) {
         }, callback);
     }
 
