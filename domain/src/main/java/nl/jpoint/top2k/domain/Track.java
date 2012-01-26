@@ -26,7 +26,7 @@ public class Track {
     @Column(name = "score")
     private double score;
 
-    protected Track(final String name, final Artist artist) {
+    public Track(final String name, final Artist artist) {
         this.name = name;
         this.artist = artist;
     }

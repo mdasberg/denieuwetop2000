@@ -16,10 +16,10 @@ public class ScorerTest {
 
     @Test
     public void sameScoreWithInitialValue() throws Exception {
-        Track trackA = new Track();
+        Track trackA = new Track("track", null);
         trackA.setScore(1000);
 
-        Track trackB = new Track();
+        Track trackB = new Track("track", null);
         trackB.setScore(1000);
 
         Scorer scorer = new Scorer(1.00d, trackA, trackB);
@@ -31,10 +31,10 @@ public class ScorerTest {
 
     @Test
     public void aWinsWithInitialValue() throws Exception {
-        Track trackA = new Track();
+        Track trackA = new Track("track", null);
         trackA.setScore(1000);
 
-        Track trackB = new Track();
+        Track trackB = new Track("track", null);
         trackB.setScore(1000);
 
         Scorer scorer = new Scorer(1.00d, trackA, trackB);
@@ -46,10 +46,10 @@ public class ScorerTest {
 
     @Test
     public void bWinsWithInitialValue() throws Exception {
-        Track trackA = new Track();
+        Track trackA = new Track("track", null);
         trackA.setScore(1000);
 
-        Track trackB = new Track();
+        Track trackB = new Track("track", null);
         trackB.setScore(1000);
 
         Scorer scorer = new Scorer(1.00d, trackA, trackB);
@@ -64,10 +64,10 @@ public class ScorerTest {
     @Test
     @Ignore
     public void aWinsWith200Difference() throws Exception {
-        Track trackA = new Track();
+        Track trackA = new Track("track", null);
         trackA.setScore(1100);
 
-        Track trackB = new Track();
+        Track trackB = new Track("track", null);
         trackB.setScore(900);
 
         Scorer scorer = new Scorer(1.00d, trackA, trackB);
@@ -82,10 +82,10 @@ public class ScorerTest {
     @Test
     @Ignore
     public void noOneWinsWith200Difference() throws Exception {
-        Track trackA = new Track();
+        Track trackA = new Track("track", null);
         trackA.setScore(1100);
 
-        Track trackB = new Track();
+        Track trackB = new Track("track", null);
         trackB.setScore(900);
 
         Scorer scorer = new Scorer(1.00d, trackA, trackB);
