@@ -4,13 +4,21 @@ body {
 }
 
 .header {
-	height:450px;
+	height:460px;
 }
 
 .song {
     background-color:#71a3ff; 
+    padding: 5px;
+    height: 200px;
 }
 
 .vote {
-    background-color:#ff3b00; 
+    margin-right:auto;
+    margin-left:auto;
+    text-align:center;
+}
+
+.spacer {
+    height: 50px;
 }
