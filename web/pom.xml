@@ -11,6 +11,7 @@
 
     <groupId>com.jpoint</groupId>
     <artifactId>web</artifactId>
+    <packaging>war</packaging>
 
     <build>
         <plugins>
