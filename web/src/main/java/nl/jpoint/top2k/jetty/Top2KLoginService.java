@@ -1,29 +1,47 @@
 package nl.jpoint.top2k.jetty;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.persist.PersistService;
+import nl.jpoint.top2k.guice.ConfigurationModule;
+import nl.jpoint.top2k.guice.PersistenceModule;
+import nl.jpoint.top2k.guice.ServiceModule;
+import nl.jpoint.top2k.service.IUserService;
+import org.eclipse.jetty.security.DefaultIdentityService;
 import org.eclipse.jetty.security.IdentityService;
 import org.eclipse.jetty.security.LoginService;
 import org.eclipse.jetty.server.UserIdentity;
 
-/**
- * Created by IntelliJ IDEA.
- * User: misha
- * Date: 26-01-12
- * Time: 20:40
- * To change this template use File | Settings | File Templates.
- */
+import javax.inject.Inject;
+import javax.security.auth.Subject;
+
+/** LoginService. */
 public class Top2KLoginService implements LoginService {
+    @Inject
+    private IUserService service;
 
     public Top2KLoginService() {
+        Injector injector = Guice.createInjector(new ServiceModule(),
+                new ConfigurationModule(),
+                new PersistenceModule());
+        injector.injectMembers(this);
+        injector.getInstance(PersistService.class).start();
     }
 
     @Override
     public String getName() {
-        return "dnt2000";  //To change body of implemented methods use File | Settings | File Templates.
+        System.out.println(service.getAll().size());
+        return "dnt2000";
     }
 
     @Override
     public UserIdentity login(String s, Object o) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        final boolean validUserCredentials = service.isValidUserCredentials(s, (String) o);
+        final UserIdentity userIdentity;
+        if (validUserCredentials) {
+            return new DefaultIdentityService().newUserIdentity(new Subject(), null, new String[]{"admin"});
+        }
+        return null;
     }
 
     @Override

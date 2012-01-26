@@ -6,7 +6,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /** User domain class. */
 @Entity(name = "Users")
-@NamedQueries({@NamedQuery(name = "User.findAll", query = "SELECT u FROM Users u ")})
+@NamedQueries({@NamedQuery(name = "User.findAll", query = "SELECT u FROM Users u "),
+        @NamedQuery(name = "User.byEmail", query = "SELECT u FROM Users u where u.email = :email ")})
 @XmlRootElement
 public class User {
     @Id
@@ -34,5 +35,9 @@ public class User {
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
+    }
+
+    public boolean validatePassword(final String expectedPassword) {
+        return passwordHash.equals(expectedPassword);
     }
 }

@@ -18,4 +18,12 @@ public interface IUserService {
      * @return users The users.
      */
     List<User> getAll();
+
+    /**
+     * Indicates if the given credentials are valid.
+     * @param email    The email address.
+     * @param password The password.
+     * @return <code>true</code> if valide, else <code>false</code>.
+     */
+    boolean isValidUserCredentials(final String email, final String password);
 }

@@ -22,4 +22,16 @@ public class UserService implements IUserService {
     public List<User> getAll() {
         return provider.get().createNamedQuery("User.findAll").getResultList();
     }
+
+    /** {@inheritDoc}. */
+    public boolean isValidUserCredentials(final String email, final String password) {
+        User user = (User) provider.get().createNamedQuery("User.byEmail").setParameter("email", email).getSingleResult();
+        final boolean valid;
+        if (user == null) {
+            valid = false;
+        } else {
+            valid = user.validatePassword(password);
+        }
+        return valid;
+    }
 }
