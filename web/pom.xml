@@ -29,12 +29,23 @@
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
+                    <loginServices>
+                        <loginService implementation="nl.jpoint.top2k.jetty.Top2KLoginService">
+                            <name>dnt2000</name>
+                        </loginService>
+                    </loginServices>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-security</artifactId>
+            <version>8.1.0.RC5</version>
+        </dependency>
+
         <dependency>
             <groupId>nl.jpoint.top2k</groupId>
             <artifactId>domain</artifactId>
