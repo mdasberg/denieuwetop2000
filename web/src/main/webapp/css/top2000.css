@@ -1,10 +1,14 @@
 body {
-    background-color:#71a3ff; 
+    background-color:#232120; 
     color:#ffffff;
 }
 
+.header {
+	height:450px;
+}
+
 .song {
-    background-color:#bcd4ff; 
+    background-color:#71a3ff; 
 }
 
 .vote {
