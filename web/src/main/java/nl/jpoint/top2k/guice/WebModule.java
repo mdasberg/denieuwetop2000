@@ -4,6 +4,7 @@ import com.google.inject.persist.PersistFilter;
 import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.servlet.ServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
+import nl.jpoint.top2k.rest.RegisterResource;
 import nl.jpoint.top2k.rest.VersionResource;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class WebModule extends ServletModule {
         filter("/rest/*").through(PersistFilter.class);
 
         bind(VersionResource.class);
+        bind(RegisterResource.class);
         serve("/rest/*").with(GuiceContainer.class, new HashMap<String, String>());
     }
 }

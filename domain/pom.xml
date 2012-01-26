@@ -15,6 +15,10 @@
     <artifactId>domain</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+        </dependency>
         <!-- Persistence -->
         <dependency>
             <groupId>javax.persistence</groupId>
