@@ -8,6 +8,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <name>Web project</name>
+    <description>Web layer</description>
 
     <groupId>com.jpoint</groupId>
     <artifactId>web</artifactId>
