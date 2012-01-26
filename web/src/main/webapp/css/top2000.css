@@ -1,10 +1,19 @@
 body {
-    background-color:#232120; 
-    color:#ffffff;
+    background-color:#ecebeb; 
+    color:#ecebeb;
+}
+
+.main {
+    background-image:url('../img/background.png');
+    padding-bottom: 20px;
 }
 
 .header {
-	height:460px;
+    height: 100px;
+}
+
+.header {
+    height: 460px;
 }
 
 .song {
@@ -21,4 +30,9 @@ body {
 
 .spacer {
     height: 50px;
+}
+
+.footer {
+    height: 50px;
+    background-image:url('../img/footer.png');
 }
