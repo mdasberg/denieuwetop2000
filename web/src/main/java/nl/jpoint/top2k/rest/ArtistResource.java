@@ -20,10 +20,12 @@ public class ArtistResource {
     private ArtistService artistService;
 
     @GET
-    @Path("/list")
+    @Path("/list/{page}")
     @Produces({ "application/x-javascript", MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public JSONWithPadding getUser(@QueryParam("jsoncallback") @DefaultValue("fn") final String callback) {
-        final List<Artist> artists = artistService.getAll();
+    public JSONWithPadding getUser(@PathParam("page") final int page,
+            @QueryParam("jsoncallback") @DefaultValue("fn") final String callback)
+    {
+        final List<Artist> artists = artistService.getPagedList(page);
         return new JSONWithPadding(new GenericEntity<List<Artist>>(artists) {
         }, callback);
     }
