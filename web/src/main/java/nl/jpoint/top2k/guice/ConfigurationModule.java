@@ -11,7 +11,7 @@ public class ConfigurationModule extends AbstractModule {
         try {
             bind(Configuration.class).toInstance(new PropertiesConfiguration("top2k.web.properties"));
         } catch (org.apache.commons.configuration.ConfigurationException e) {
-            throw new IllegalArgumentException("social.properties could not be found on the classpath.");
+            throw new IllegalArgumentException("top2k.properties could not be found on the classpath.");
         }
     }
 }

@@ -5,7 +5,6 @@ import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 import nl.jpoint.top2k.rest.VersionResource;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /** Web Module */
 public class WebModule extends ServletModule {
