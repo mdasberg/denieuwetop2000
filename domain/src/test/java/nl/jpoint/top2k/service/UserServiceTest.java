@@ -1,12 +1,13 @@
 package nl.jpoint.top2k.service;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.persist.PersistService;
 import nl.jpoint.top2k.TestUtil;
 import nl.jpoint.top2k.domain.User;
-import nl.jpoint.top2k.guice.DomainModule;
+import nl.jpoint.top2k.guice.PersistenceModule;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,7 +29,18 @@ public class UserServiceTest {
 
     @Before
     public void setUp() {
-        Injector injector = Guice.createInjector(new DomainModule());
+        Injector injector = Guice.createInjector(new PersistenceModule(), new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(IMailService.class).toInstance(new IMailService() {
+                    @Override
+                    public void sendMail(String email, String subject, String body) {
+                        // do nothing
+                    }
+                });
+                bind(IUserService.class).to(UserService.class);
+            }
+        });
         injector.getInstance(PersistService.class).start();
         injector.injectMembers(this);
         transaction = provider.get().getTransaction();

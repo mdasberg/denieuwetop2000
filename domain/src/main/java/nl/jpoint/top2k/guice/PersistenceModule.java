@@ -2,13 +2,12 @@ package nl.jpoint.top2k.guice;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.persist.jpa.JpaPersistModule;
-import nl.jpoint.top2k.service.UserService;
 
 import java.io.IOException;
 import java.util.Properties;
 
 /** Domain module. */
-public class DomainModule extends AbstractModule {
+public class PersistenceModule extends AbstractModule {
 
     @Override
     protected void configure() {
@@ -21,6 +20,5 @@ public class DomainModule extends AbstractModule {
             e.printStackTrace();
         }
         install(persistenceModule);
-        bind(UserService.class);
     }
 }

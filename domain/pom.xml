@@ -61,6 +61,11 @@
             <artifactId>h2</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+        </dependency>
+
         <!-- Mail -->
         <dependency>
             <groupId>javax.mail</groupId>
