@@ -1,8 +1,11 @@
 package nl.jpoint.top2k;
 
+import org.junit.Ignore;
+
 import java.lang.reflect.Field;
 
 /** Test util. */
+@Ignore
 public final class TestUtil {
 
     /**
