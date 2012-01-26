@@ -1,0 +1,134 @@
+In 2012 gaan we een nieuwe Top 2000 applicatie uitbrengen. Normaal mogen mensen maximaal 10 liedjes opgeven en daaruit wordt de complete lijst opgebouwd. Je vergelijkt dus nooit liedjes onderling! Is Queen met Bohemian Rhapsody echt beter dan Hotel California, of zetten mensen die vaker in hun top 5 of 10 lijstje omdat ze die toevallig kennen en het zo 'hoort'?
+
+Daarom het volgende idee:
+Op onze te bouwen website krijg je steeds twee liedjes te zien. De gebruiker moet dan een keuze maken tussen deze liedjes, heel simpel: Van deze twee liedjes, welke is beter?
+
+Technisch werken we in de achterkant met dezelfde rating als je bij het schaken gebruikt (ELO). Dit systeem heeft zich bewezen en werkt op dezelfde manier, steeds nemen twee mannen het tegen elkaar op en de uitkomst bepaalt je rating.
+
+================================================================================================
+User Stories:
+================================================================================================
+
+==== Als gebruiker wil ik mij kunnen registreren voor de nieuwe top 2000 ====
+
+Simpele registratie met email en wachtwoord, niks meer. Mailtje naar de gebruiker met bevestigingslink. In de database slaan we alleen het emailadres (username) en hash van het wachtwoord op.
+
+
+==== Als gebruiker wil ik kunnen zoeken/browsen op de pagina's van artiesten. ====
+
+De gebruiker moet kunnen zoeken en browsen door alle artiesten.
+
+Voor elke artiest is er een pagina waar op staat:
+* Extra informatie over de artiest
+* Overzicht van alle liedjes van deze artiest/groep
+
+==== Als gebruiker wil ik het overzicht van alle liedjes kunnen inzien ====
+
+De gebruiker moet kunnen zoeken en browsen door alle liedjes.
+
+Van de liedjes kennen we:
+Titel (zoekbaar)
+Artiest (zoekbaar)
+Misc (optioneel: overige informatie, album, jaartal, verzin het maar!)
+YouTube ID (optioneel: YouTube id voor het embedden van een filmpje met het liedje van de song)
+
+==== Als gebruiker wil ik liedjes kunnen toevoegen aan het systeem
+
+De gebruiker kan liedjes toevoegen en de bovenstaande velden moeten dan gevuld worden.
+
+(Uitdaging!) Tijdens het invoeren geeft het systeem aan of er liedjes/artiesten die er veel op lijken.
+Als de gebruiker invult "Kueen" en "Bohemien Rapsoly" zegt het systeem "Bedoelde je Queen - Bohemian Rhapsody"?
+
+==== Als gebruiker wil ik liedjes en artiesten informatie editen ====
+
+Alle gebruikers hebben de mogelijkheid om bestaande artiesten en liedjes te wijzigen. Deze wijzigingen worden opgeslagen als voorstel en zijn nog niet zichtbaar.
+
+==== Als beheerder of originele aanmaker van een liedjes wil ik wijzigingen kunnen inzien en toepassen. ====
+
+Als een beheerder of originele maker van een artiest en/of liedje zie je alle ingestuurde wijzigingen.
+Je kan nu kiezen voor het wel/niet toepassen van het wijzigingsvoorstel.
+
+==== Als eigenaar van denieuwetop2000.nl wil ik graag dat het systeem initieel een redelijke vulling heeft. ====
+
+Zelf kloppen? Importeren? Laat de fantasie de vrije loop!
+
+==== Als gebruiker wil ik kunnen stemmen op liedjes uit deze nieuwe top 2000. ====
+
+De gebruiker krijgt een scherm te zien met daarop de informatie van twee liedjes.
+Het systeem kiest willekeurig twee nummers uit de top 2000 die maximaal 20 posities uit elkaar liggen in de ranglijst.
+Elk nieuw liedje begint met een rating van "1000"
+Elke gebruiker begint met een persoonlijke k-factor van 1.00
+
+De gebruiker kan kiezen voor:
+1. Liedje A is beter
+2. Ik weet het niet / geen voorkeur
+3. Liedje B is beter
+
+(Implementatie:)
+Na elke beoordeling gaat de k-factor van de gebruiker omlaag met -0.001, dus na 1000 ratings heb je geen invloed meer.
+
+De ratings van de liedjes worden hierna aangepast, bijvoorbeeld:
+
+Liedje A: huidige rating 2012
+Liedje B: huidige rating 2310
+
+Het verschil is dus: 298
+
+Volgens de ELO tabel (kan je vinden op bijvoorbeeld wikipedia) betekend dat:
+
+Liedje A: 0.16
+Liedje B: 0.84
+
+De gebruiker heeft al 10x eerder een keuze ingevuld, dus heeft PK-Factor: 0.990
+
+Rating-verschil = K-factor * ( Result – Expected Result )
+
+Als de gebruiker voor liedje A kiest: 
+
+0.99 * (1 - 0.16) = Rating liedje A + 0,8316
+0.99 * (0 - 0.84) = Rating liedje B - 0,8316
+
+Als de gebruiker voor liedje B kiest:
+
+0.99 * (0 - 0.16) = Rating liedje A - 0,1584
+0.99 * (1 - 0.84) = Rating liedje B + 0,1584
+
+Bij 'geen voorkeur' (ook een wijziging in rating!):
+
+0.99 * (0.5 - 0.16) = Rating liedje A + 0,034
+0.99 * (0.5 - 0.84) = Rating liedje B - 0,3366
+
+
+==== Als gebruiker wil ik de huidige stand zien van de top 2000 ====
+
+Toon een overzicht met de huidige stand. Daarin laten we niet de huidige rating zien, alleen de titels/artiesten.
+
+==== Als gebruiker wil ik in de huidige stand zien welke wijzigingen er zijn ten opzichte van vorige week. ====
+
+Elke zondag maken we een snapshot van de complete lijst. Daarna als je de huidige lijst ophaalt vergelijken we de huidige positie van het liedje met de positie van de vorige snapshot.
+We laten met een groen pijltje, rood pijltje of geel 'is gelijk'-teken zien of het nummer nu hoger, lager of gelijk staat.
+
+==== Als beheerder wil ik de lijst kunnen vastleggen en alle liedjes en gebruikers resetten. ====
+
+Aan het einde van het jaar wil je als beheerder een snapshot kunnen maken van de ranglijst en die publiceren op de website.
+Bijvoorbeeld met "Eindstand 2012".
+
+Hierna zullen alle liedjes teruggezet worden naar een rating van 1000 en alle gebruikers staan weer op 1 met hun k-factor.
+
+==== Als gebruiker wil ik kunnen aangeven dat een bepaalde artiest of nummer (op pagina van deze artiest of het liedje) niet oke is. ====
+
+Zodra een gebruiker een liedje aanvinkt als "niet oke" zal er een bericht gestuurd worden naar de beheerder.
+
+==== Als beheerder wil ik een liedje en/of artiest kunnen verwijderen uit het systeem. ====
+
+Bij het verwijderen van een liedje:
+* Pagina is niet meer zichtbaar
+* Liedje staat niet meer in de overzichten
+
+Bij het verwijderen van een artiest:
+* Artiest is niet meer zichtbaar
+* Alle liedjes worden tevens verwijderd
+================================================================================================
+
+
+
