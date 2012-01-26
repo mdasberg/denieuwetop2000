@@ -11,5 +11,6 @@ public class ServiceModule extends AbstractModule {
         bind(IMailService.class).to(MailService.class);
         bind(IArtistService.class).to(ArtistService.class);
         bind(ITrackService.class).to(TrackService.class);
+        bind(IContestService.class).to(ContestService.class);
     }
 }

@@ -33,4 +33,9 @@ public interface ITrackService {
      */
     Track getById(long id);
 
+    /**
+     * Returns a list of all valid track ids.
+     * @return a list of all valid track ids.
+     */
+    List<Long> getValidTrackIds();
 }

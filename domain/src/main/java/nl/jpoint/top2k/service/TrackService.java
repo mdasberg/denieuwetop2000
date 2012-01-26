@@ -41,4 +41,8 @@ public class TrackService implements ITrackService {
         return provider.get().find(Track.class, id);
     }
 
+    @Override
+    public List<Long> getValidTrackIds() {
+        return provider.get().createQuery("SELECT t.id FROM Track t WHERE t.artist IS NOT NULL").getResultList();
+    }
 }
