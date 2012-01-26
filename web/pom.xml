@@ -36,6 +36,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>nl.jpoint.top2k</groupId>
+            <artifactId>domain</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
         </dependency>
@@ -68,10 +73,16 @@
             <artifactId>servlet-api</artifactId>
         </dependency>
 
-         <!-- Commons -->
+        <!-- Commons -->
         <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
         </dependency>
     </dependencies>
 </project>
