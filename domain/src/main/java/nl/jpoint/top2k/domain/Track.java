@@ -23,10 +23,19 @@ public class Track {
     @ManyToOne
     @JoinColumn(name = "Artist", insertable = false, updatable = false)
     private Artist artist;
+    @Column(name = "score")
+    private double score;
 
     protected Track(final String name, final Artist artist) {
         this.name = name;
         this.artist = artist;
     }
 
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public double getScore() {
+        return score;
+    }
 }
