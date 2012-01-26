@@ -11,7 +11,7 @@ import nl.jpoint.top2k.domain.Artist;
 /**
  * Artist service.
  */
-public class ArtistService {
+public class ArtistService implements IArtistService {
 
     private static final int PAGE_SIZE = 25;
 

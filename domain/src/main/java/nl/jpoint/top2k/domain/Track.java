@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Name of a track.
  */
 @Entity
-@Table(name = "Track")
+@Table(name = "TrackImport")
 @NamedQueries({ @NamedQuery(name = "Track.findAll", query = "SELECT t FROM Track t ") })
 @XmlRootElement
 public class Track {
@@ -22,24 +22,29 @@ public class Track {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @XmlElement
-    @Column(name = "title", nullable = false)
+    @Column(name = "name", nullable = false)
     @NotNull
     private String title;
+    /*
     @XmlElement
     @Column(name = "album")
     private String album;
     @XmlElement
     @Column(name = "release")
     private int releaseYear;
+    */
     @XmlElement
     @ManyToOne
     @JoinColumn(name = "artist", updatable = false, nullable = false)
     @NotNull
     private Artist artist;
+    /*
     @Column(name = "score", nullable = false)
     @NotNull
     @Min(value = 0)
-    private double score;
+    */
+    private Double score;
+    /*
     @XmlElement
     @Column(name = "prevScore")
     @Min(value = 0)
@@ -47,6 +52,7 @@ public class Track {
     @XmlElement
     @Column(name = "youtubeid")
     private String youTubeId;
+    */
 
     protected Track() {
 
@@ -63,6 +69,9 @@ public class Track {
     }
 
     public double getScore() {
+        if (score == null) {
+            score = 1000d;
+        }
         return score;
     }
 

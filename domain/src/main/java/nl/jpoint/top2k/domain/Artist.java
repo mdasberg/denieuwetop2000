@@ -22,7 +22,6 @@ public class Artist {
     @XmlElement
     @Column(name = "name")
     private String     name;
-    @XmlElement
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "artist")
     private Set<Track> tracks;
