@@ -5,8 +5,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /** User domain class. */
-@Entity(name = "User")
-@NamedQueries({@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u ")})
+@Entity(name = "Users")
+@NamedQueries({@NamedQuery(name = "User.findAll", query = "SELECT u FROM Users u ")})
 @XmlRootElement
 public class User {
     @Id

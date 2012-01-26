@@ -39,6 +39,7 @@
         <hibernate.version>3.4.0.GA</hibernate.version>
         <persistence-api.version>1.0</persistence-api.version>
         <h2.version>1.1.100</h2.version>
+        <postgresql.version>9.1-901-1.jdbc4</postgresql.version>
         <slf4j.version>1.5.6</slf4j.version>
         <log4j.version>1.2.14</log4j.version>
         <guava.version>10.0</guava.version>
@@ -181,6 +182,11 @@
                 <artifactId>h2</artifactId>
                 <version>${h2.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
