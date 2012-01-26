@@ -6,21 +6,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * User: ron
- * Date: 26-01-12
- * Time: 15:46
- */
 public class ScorerTest {
-
 
     @Test
     public void sameScoreWithInitialValue() throws Exception {
-        Track trackA = new Track("track", null);
-        trackA.setScore(1000);
-
-        Track trackB = new Track("track", null);
-        trackB.setScore(1000);
+        Track trackA = createTrack(1000);
+        Track trackB = createTrack(1000);
 
         Scorer scorer = new Scorer(1.00d, trackA, trackB);
         scorer.noVote();
@@ -31,11 +22,8 @@ public class ScorerTest {
 
     @Test
     public void aWinsWithInitialValue() throws Exception {
-        Track trackA = new Track("track", null);
-        trackA.setScore(1000);
-
-        Track trackB = new Track("track", null);
-        trackB.setScore(1000);
+        Track trackA = createTrack(1000);
+        Track trackB = createTrack(1000);
 
         Scorer scorer = new Scorer(1.00d, trackA, trackB);
         scorer.aWins();
@@ -46,11 +34,8 @@ public class ScorerTest {
 
     @Test
     public void bWinsWithInitialValue() throws Exception {
-        Track trackA = new Track("track", null);
-        trackA.setScore(1000);
-
-        Track trackB = new Track("track", null);
-        trackB.setScore(1000);
+        Track trackA = createTrack(1000);
+        Track trackB = createTrack(1000);
 
         Scorer scorer = new Scorer(1.00d, trackA, trackB);
         scorer.bWins();
@@ -60,20 +45,14 @@ public class ScorerTest {
 
     }
 
-
     @Test
     @Ignore
     public void aWinsWith200Difference() throws Exception {
-        Track trackA = new Track("track", null);
-        trackA.setScore(1100);
-
-        Track trackB = new Track("track", null);
-        trackB.setScore(900);
+        Track trackA = createTrack(1100);
+        Track trackB = createTrack(900);
 
         Scorer scorer = new Scorer(1.00d, trackA, trackB);
         scorer.aWins();
-
-//        0.76	0.24
 
         assertEquals(1100 + (1 - 0.76), trackA.getScore(), 0.0d);
         assertEquals(900 + (0 - 0.24), trackB.getScore(), 0.0d);
@@ -82,18 +61,19 @@ public class ScorerTest {
     @Test
     @Ignore
     public void noOneWinsWith200Difference() throws Exception {
-        Track trackA = new Track("track", null);
-        trackA.setScore(1100);
-
-        Track trackB = new Track("track", null);
-        trackB.setScore(900);
+        Track trackA = createTrack(1100);
+        Track trackB = createTrack(900);
 
         Scorer scorer = new Scorer(1.00d, trackA, trackB);
         scorer.noVote();
 
-//        0.76	0.24
-
         assertEquals(1100 + (0.5 - 0.76), trackA.getScore(), 0.0d);
         assertEquals(900 + (0.5 - 0.24), trackB.getScore(), 0.0d);
+    }
+
+    private Track createTrack(int score) {
+        Track track = new Track("track", null);
+        track.setScore(score);
+        return track;
     }
 }
