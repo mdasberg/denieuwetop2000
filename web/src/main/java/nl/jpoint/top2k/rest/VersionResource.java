@@ -9,7 +9,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-/** Clieop03 resource. */
 @Singleton
 @Path("/version")
 public class VersionResource {
