@@ -11,13 +11,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User {
     @Id
     @Column(name = "id")
-    @XmlElement(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @XmlElement
     @Column(name = "username")
     private String username;
+    @XmlElement
     @Column(name = "email")
     private String email;
+    @XmlElement
     @Column(name = "passwordHash")
     private String passwordHash;
 
