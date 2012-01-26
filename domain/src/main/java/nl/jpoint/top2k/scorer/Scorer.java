@@ -13,9 +13,10 @@ public class Scorer {
     private Track trackB;
 
     public Scorer(double v, Track trackA, Track trackB) {
-
         this.trackA = trackA;
         this.trackB = trackB;
+
+        
     }
 
     public void aWins() {
@@ -27,6 +28,7 @@ public class Scorer {
     }
 
     private void win(Track winningTrack, Track losingTrack) {
+
         double winningScore = winningTrack.getScore();
         double losingScore = losingTrack.getScore();
 
