@@ -1,55 +1,34 @@
 package nl.jpoint.top2k.domain;
 
-/**
- * User domain class.
- */
-public class User {
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+/** User domain class. */
+@Entity(name = "User")
+@NamedQueries({@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u ")})
+@XmlRootElement
+public class User {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @XmlElement
+    @Column(name = "username")
     private String username;
+    @XmlElement
+    @Column(name = "email")
     private String email;
+    @XmlElement
+    @Column(name = "passwordHash")
     private String passwordHash;
-    
+
     protected User() {
     }
-    
+
     public User(final String username, final String email, final String passwordHash) {
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-    
-
 }

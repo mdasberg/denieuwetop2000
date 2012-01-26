@@ -1,24 +1,35 @@
 package nl.jpoint.top2k.domain;
 
-import java.util.Date;
-import java.util.UUID;
+import java.util.Set;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * An artist is generally a musician, group of musicians, a collaboration of multiple musicians or other music
- * professional contributing to the works described in the MusicBrainz Database. As the MusicBrainz project evolves,
- * so does the definition of "artist", so that now the artist table is used to hold everything up to music industry
- * lawyers (see Miscellaneous Production Relationship Type). In general, however, artists are people who sing or play
- * instruments.
+ * An artist/band. Currently we only keep track of the name.
  */
+@Entity
+@Table(name = "Artist")
+@NamedQueries({ @NamedQuery(name = "Artist.findAll", query = "SELECT a FROM Artist a ") })
+@XmlRootElement
 public class Artist {
-    
-    private UUID mbId;
-    private String name;
-    private String alias;
-    private String alternateName;
-    private String comment;
-    private ArtistType type;
-    private Date beginDate;
-    private Date endDate;
+
+    @Id
+    @Column(name = "id")
+    @XmlElement(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long       id;
+    @Column(name = "name")
+    private String     name;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "artist")
+    private Set<Track> tracks;
+
+    protected Artist() {
+    }
+
+    public Artist(final String name) {
+        this.name = name;
+    }
 
 }
