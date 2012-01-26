@@ -6,21 +6,16 @@ import nl.jpoint.top2k.domain.Track;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * User: ron
- * Date: 26-01-12
- * Time: 15:50
- */
 public class Scorer {
 
     private Track trackA;
     private Track trackB;
+    private double kFactor;
 
-    public Scorer(double v, Track trackA, Track trackB) {
+    public Scorer(double kFactor, Track trackA, Track trackB) {
+        this.kFactor = kFactor;
         this.trackA = trackA;
         this.trackB = trackB;
-
-
     }
 
     public void aWins() {
@@ -32,38 +27,30 @@ public class Scorer {
     }
 
     private void win(Track winningTrack, Track losingTrack) {
-
         double winningScore = winningTrack.getScore();
         double losingScore = losingTrack.getScore();
 
-        EloRating rating = EloRating.getRating(winningScore - losingScore);
+        EloRating rating = getEloRating(winningScore, losingScore);
 
-        winningScore += 1 * (1 - rating.getLeftScore());
-        losingScore += 1 * (0 - rating.getRightScore());
+        winningScore += kFactor * (1 - rating.getLeftScore());
+        losingScore += kFactor * (0 - rating.getRightScore());
 
         winningTrack.setScore(winningScore);
         losingTrack.setScore(losingScore);
     }
 
 
-    public void noVote() {
+    public void voteTie() {
         double winningScore = trackA.getScore();
         double losingScore = trackB.getScore();
 
-        EloRating rating = EloRating.getRating(winningScore - losingScore);
+        EloRating rating = getEloRating(winningScore, losingScore);
 
-        winningScore += 1 * (0.5d - rating.getLeftScore());
-        losingScore += 1 * (0.5d - rating.getRightScore());
+        winningScore += kFactor * (0.5d - rating.getLeftScore());
+        losingScore += kFactor * (0.5d - rating.getRightScore());
 
         trackA.setScore(winningScore);
         trackB.setScore(losingScore);
-    }
-
-    private int getELO() {
-
-
-        return 0;
-
     }
 
     private static class EloRating {
@@ -113,6 +100,14 @@ public class Scorer {
             }
 
             return new EloRating(1.0d);
+        }
+    }
+
+    private EloRating getEloRating(double winningScore, double losingScore) {
+        if (winningScore > losingScore) {
+            return EloRating.getRating(winningScore - losingScore);
+        } else {
+            return EloRating.getRating(losingScore - winningScore);
         }
     }
 }
