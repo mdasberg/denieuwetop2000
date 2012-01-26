@@ -3,6 +3,7 @@ package nl.jpoint.top2k.guice;
 import com.google.inject.persist.PersistFilter;
 import com.google.inject.servlet.ServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
+import nl.jpoint.top2k.rest.ArtistResource;
 import nl.jpoint.top2k.rest.RegisterResource;
 import nl.jpoint.top2k.rest.VersionResource;
 
@@ -15,6 +16,7 @@ public class WebModule extends ServletModule {
 
         bind(VersionResource.class);
         bind(RegisterResource.class);
+        bind(ArtistResource.class);
         serve("/rest/*").with(GuiceContainer.class, new HashMap<String, String>());
     }
 }

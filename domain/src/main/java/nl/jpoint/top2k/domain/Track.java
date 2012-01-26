@@ -33,10 +33,9 @@ public class Track {
     private int releaseYear;
     @XmlElement
     @ManyToOne
-    @JoinColumn(name = "Artist", updatable = false, nullable = false)
+    @JoinColumn(name = "artist", updatable = false, nullable = false)
     @NotNull
     private Artist artist;
-    @XmlElement
     @Column(name = "score", nullable = false)
     @NotNull
     @Min(value = 0)
@@ -49,6 +48,9 @@ public class Track {
     @Column(name = "youtubeid")
     private String youTubeId;
 
+    protected Track() {
+
+    }
 
     public Track(final String title, final Artist artist) {
         score = 1000d;

@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * An artist/band. Currently we only keep track of the name.
  */
 @Entity
-@Table(name = "Artist")
+@Table(name = "Artists")
 @NamedQueries({ @NamedQuery(name = "Artist.findAll", query = "SELECT a FROM Artist a ") })
 @XmlRootElement
 public class Artist {
