@@ -37,7 +37,7 @@
         <servlet-api.version>3.0-alpha-1</servlet-api.version>
         <commons-configuration.version>1.7</commons-configuration.version>
         <hibernate.version>3.4.0.GA</hibernate.version>
-        <persistence-api.version>1.0</persistence-api.version>
+        <persistence-api.version>1.0.2</persistence-api.version>
         <h2.version>1.1.100</h2.version>
         <postgresql.version>9.1-901-1.jdbc4</postgresql.version>
         <slf4j.version>1.5.6</slf4j.version>
@@ -134,6 +134,17 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>${h2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>1.0.0.GA</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>4.0.2.GA</version>
             </dependency>
 
             <!-- Logging -->

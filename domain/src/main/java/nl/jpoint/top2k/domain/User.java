@@ -22,8 +22,12 @@ public class User {
     @XmlElement
     @Column(name = "passwordHash")
     private String passwordHash;
+    @XmlElement
+    @Column(name = "isAdmin", insertable = false, updatable = false)
+    private boolean isAdmin;
 
     protected User() {
+        isAdmin = false;
     }
 
     public User(final String username, final String email, final String passwordHash) {

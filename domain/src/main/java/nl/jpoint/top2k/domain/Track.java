@@ -1,6 +1,9 @@
 package nl.jpoint.top2k.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -18,16 +21,38 @@ public class Track {
     @XmlElement(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name")
-    private String name;
+    @XmlElement
+    @Column(name = "title", nullable = false)
+    @NotNull
+    private String title;
+    @XmlElement
+    @Column(name = "album")
+    private String album;
+    @XmlElement
+    @Column(name = "release")
+    private int releaseYear;
+    @XmlElement
     @ManyToOne
-    @JoinColumn(name = "Artist", insertable = false, updatable = false)
+    @JoinColumn(name = "Artist", updatable = false, nullable = false)
+    @NotNull
     private Artist artist;
-    @Column(name = "score")
+    @XmlElement
+    @Column(name = "score", nullable = false)
+    @NotNull
+    @Min(value = 0)
     private double score;
+    @XmlElement
+    @Column(name = "prevScore")
+    @Min(value = 0)
+    private double prevScore;
+    @XmlElement
+    @Column(name = "youtubeid")
+    private String youTubeId;
 
-    public Track(final String name, final Artist artist) {
-        this.name = name;
+
+    public Track(final String title, final Artist artist) {
+        score = 1000d;
+        this.title = title;
         this.artist = artist;
     }
 
@@ -38,4 +63,5 @@ public class Track {
     public double getScore() {
         return score;
     }
+
 }
