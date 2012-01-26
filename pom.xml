@@ -8,14 +8,22 @@
     <artifactId>denieuwetop2000</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-   	<name>Parent pom</name>
+    <name>Parent pom</name>
     <description>Parent pom</description>
-    
+
 
     <modules>
         <module>web</module>
         <module>domain</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>10.0</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
