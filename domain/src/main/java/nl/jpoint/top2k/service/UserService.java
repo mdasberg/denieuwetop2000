@@ -9,6 +9,7 @@ import java.util.List;
 
 /** User service. */
 public class UserService {
+
     @Inject
     private Provider<EntityManager> provider;
 
