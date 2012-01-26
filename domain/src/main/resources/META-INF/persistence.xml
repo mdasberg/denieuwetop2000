@@ -6,6 +6,7 @@
 
     <persistence-unit name="dnt2000" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>nl.jpoint.top2k.domain.User</class>
     </persistence-unit>
 
 </persistence>

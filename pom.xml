@@ -39,9 +39,13 @@
         <hibernate.version>3.4.0.GA</hibernate.version>
         <persistence-api.version>1.0</persistence-api.version>
         <h2.version>1.1.100</h2.version>
+        <postgresql.version>9.1-901-1.jdbc4</postgresql.version>
         <slf4j.version>1.5.6</slf4j.version>
         <log4j.version>1.2.14</log4j.version>
         <guava.version>10.0</guava.version>
+        <mockito.version>1.9.0</mockito.version>
+        <junit.version>4.8.2</junit.version>
+        <javax.mail.version>1.4.4</javax.mail.version>
     </properties>
 
     <dependencyManagement>
@@ -155,11 +159,35 @@
                 <version>${log4j.version}</version>
             </dependency>
             <dependency>
-		    	<groupId>javax.mail</groupId>
-		    	<artifactId>mail</artifactId>
-		    	<version>1.4.4</version>
-			</dependency>        
-            
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${javax.mail.version}</version>
+            </dependency>
+
+            <!-- Testing -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

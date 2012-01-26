@@ -1,7 +1,6 @@
 package nl.jpoint.top2k.scorer;
 
 import nl.jpoint.top2k.domain.Track;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -46,7 +45,6 @@ public class ScorerTest {
     }
 
     @Test
-    @Ignore
     public void aWinsWith200Difference() throws Exception {
         Track trackA = createTrack(1100);
         Track trackB = createTrack(900);
@@ -59,7 +57,6 @@ public class ScorerTest {
     }
 
     @Test
-    @Ignore
     public void noOneWinsWith200Difference() throws Exception {
         Track trackA = createTrack(1100);
         Track trackB = createTrack(900);
