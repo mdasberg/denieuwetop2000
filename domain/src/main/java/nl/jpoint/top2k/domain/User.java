@@ -51,7 +51,7 @@ public class User {
 	}
 
     /**
-     * Creates the user, this will hash the password using a sha hash. Getpassword
+     * Creates the user, this will hash the password using a sha hash. Get password
      * will return the hashed password.
      *
      * @param username the username
