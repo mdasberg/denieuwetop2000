@@ -8,6 +8,7 @@ import com.google.inject.persist.PersistService;
 import nl.jpoint.top2k.TestUtil;
 import nl.jpoint.top2k.domain.User;
 import nl.jpoint.top2k.guice.PersistenceModule;
+import nl.jpoint.top2k.util.SecurityUtil;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,6 +27,7 @@ public class UserServiceTest {
     private EntityTransaction transaction;
     private User user1;
     private User user2;
+
 
     @Before
     public void setUp() {
@@ -65,6 +67,46 @@ public class UserServiceTest {
     }
 
     @Test
+    public void shouldCreateUserWithHashedPassword() throws Exception {
+
+        transaction.begin();
+        service.create(user1);
+        transaction.commit();
+
+        User retrieved = service.findUserByEmail(user1.getEmail());
+        assertEquals(SecurityUtil.createSHAHash("passwordHash"), retrieved.getPassword());
+
+    }
+
+    @Test
+    public void validateUserPassword() throws Exception {
+
+        transaction.begin();
+        service.create(user1);
+        transaction.commit();
+
+        User retrieved = service.findUserByEmail(user1.getEmail());
+        boolean result = retrieved.validatePassword("passwordHash");
+
+        assertEquals(true,result);
+
+    }
+
+    @Test
+    public void failValidateUserPassword() throws Exception {
+
+        transaction.begin();
+        service.create(user1);
+        transaction.commit();
+
+        User retrieved = service.findUserByEmail(user1.getEmail());
+        boolean result = retrieved.validatePassword("somethingCompletelyDifferent");
+
+        assertEquals(false,result);
+
+    }
+
+    @Test
     public void shouldGetAllUsers() throws Exception {
         assertEquals(0, service.getAll().size());
 
@@ -74,6 +116,15 @@ public class UserServiceTest {
 
         assertEquals(1, service.getAll().size());
     }
-
+    
+    
+    @Test
+    public void shouldCreateAShaValue() {
+        String toHash = "PasswordToHash";
+        String hash = SecurityUtil.createSHAHash(toHash);
+        
+        assertNotNull(hash);
+        assertEquals(40,hash.length());
+    }
 
 }

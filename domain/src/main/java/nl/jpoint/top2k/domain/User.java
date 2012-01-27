@@ -1,5 +1,7 @@
 package nl.jpoint.top2k.domain;
 
+import nl.jpoint.top2k.util.SecurityUtil;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,19 +44,33 @@ public class User {
 	@Column(name = "finishedRegistration")
 	private Boolean finishedRegistration = false;
 
-	protected User() {
+    private transient String password;
+
+    protected User() {
 		isAdmin = false;
 	}
 
+    /**
+     * Creates the user, this will hash the password using a sha hash. Getpassword
+     * will return the hashed password.
+     *
+     * @param username the username
+     * @param email users email
+     * @param password password that needs to be hashed
+     */
 	public User(final String username, final String email,
-			final String passwordHash) {
+			final String password) {
 		this.username = username;
 		this.email = email;
-		this.passwordHash = passwordHash;
+		this.passwordHash = SecurityUtil.createSHAHash(password);
 	}
 
 	public boolean validatePassword(final String expectedPassword) {
-		return passwordHash.equals(expectedPassword);
+        if (expectedPassword != null && passwordHash.equals(SecurityUtil.createSHAHash(expectedPassword))) {
+            return true;
+        } else {
+          return false;
+        }
 	}
 
 	public String getPassword() {
@@ -64,4 +80,8 @@ public class User {
 	public void setFinishedRegistration(final boolean finishedRegistration) {
 		this.finishedRegistration = finishedRegistration;
 	}
+    
+    public String getEmail(){
+        return email;
+    }
 }
