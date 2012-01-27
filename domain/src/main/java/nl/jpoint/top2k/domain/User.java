@@ -21,19 +21,24 @@ public class User {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@XmlElement
+
+    @XmlElement
 	@Column(name = "username")
 	private String username;
-	@XmlElement
+
+    @XmlElement
 	@Column(name = "email")
 	private String email;
-	@XmlElement
+
+    @XmlElement
 	@Column(name = "passwordHash")
 	private String passwordHash;
-	@XmlElement
+
+    @XmlElement
 	@Column(name = "isAdmin")
 	private Boolean isAdmin = false;
-	@XmlElement
+
+    @XmlElement
 	@Column(name = "finishedRegistration")
 	private Boolean finishedRegistration = false;
 

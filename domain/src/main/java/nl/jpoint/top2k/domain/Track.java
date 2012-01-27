@@ -21,29 +21,36 @@ public class Track {
     @XmlElement(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @XmlElement
     @Column(name = "name", nullable = false)
     @NotNull
     private String title;
+
     @XmlElement
     @Column(name = "album")
     private String album;
+
     @XmlElement
     @Column(name = "release")
     private Integer releaseYear;
+
     @XmlElement
     @ManyToOne
     @JoinColumn(name = "artist", updatable = false, nullable = false)
     @NotNull
     private Artist artist;
+
     @Column(name = "score", nullable = false)
     @NotNull
     @Min(value = 0)
     private Double score;
+
     @XmlElement
     @Column(name = "prevScore")
     @Min(value = 0)
     private Double prevScore;
+
     @XmlElement
     @Column(name = "youtubeid")
     private String youTubeId;
