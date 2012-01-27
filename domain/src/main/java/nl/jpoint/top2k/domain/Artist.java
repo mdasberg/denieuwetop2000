@@ -19,9 +19,11 @@ public class Artist {
     @XmlElement(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long       id;
+
     @XmlElement
     @Column(name = "name")
     private String     name;
+
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "artist")
     private Set<Track> tracks;
