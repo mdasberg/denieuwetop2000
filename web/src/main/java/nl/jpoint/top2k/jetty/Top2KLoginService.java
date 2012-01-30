@@ -37,7 +37,7 @@ public class Top2KLoginService implements LoginService {
     @Override
     public UserIdentity login(String s, Object o) {
         final boolean validUserCredentials = service.isValidUserCredentials(s, (String) o);
-        final UserIdentity userIdentity;
+        
         if (validUserCredentials) {
             return new DefaultIdentityService().newUserIdentity(new Subject(), null, new String[]{"admin"});
         }

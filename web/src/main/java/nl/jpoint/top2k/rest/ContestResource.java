@@ -7,22 +7,15 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 
-import com.google.inject.persist.Transactional;
 import com.sun.jersey.api.json.JSONWithPadding;
 import nl.jpoint.top2k.domain.Track;
-import nl.jpoint.top2k.domain.User;
 import nl.jpoint.top2k.service.IContestService;
-import nl.jpoint.top2k.service.IMailService;
-import nl.jpoint.top2k.service.ITrackService;
-import nl.jpoint.top2k.service.IUserService;
 
 
 @Singleton
 @Path("/contest")
 public class ContestResource {
 
-    @Inject
-    private IUserService userService;
     @Inject
     private IContestService contestService;
 
