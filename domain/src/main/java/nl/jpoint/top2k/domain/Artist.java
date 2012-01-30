@@ -1,7 +1,18 @@
 package nl.jpoint.top2k.domain;
 
 import java.util.Set;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,25 +25,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Artist {
 
-    @Id
-    @Column(name = "id")
-    @XmlElement(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long       id;
+	@Id
+	@Column(name = "id")
+	@XmlElement(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @XmlElement
-    @Column(name = "name")
-    private String     name;
+	@XmlElement
+	@Column(name = "name")
+	private String name;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "artist")
-    private Set<Track> tracks;
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "artist")
+	private Set<Track> tracks;
 
-    protected Artist() {
-    }
+	protected Artist() {
+	}
 
-    public Artist(final String name) {
-        this.name = name;
-    }
+	public Artist(final String name) {
+		this.name = name;
+	}
 
 }

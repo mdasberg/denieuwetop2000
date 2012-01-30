@@ -1,7 +1,5 @@
 package nl.jpoint.top2k.domain;
 
-import nl.jpoint.top2k.util.SecurityUtil;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +9,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import nl.jpoint.top2k.util.SecurityUtil;
 
 /** User domain class. */
 @Entity(name = "Users")
@@ -24,64 +24,68 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-    @XmlElement
+	@XmlElement
 	@Column(name = "username")
 	private String username;
 
-    @XmlElement
+	@XmlElement
 	@Column(name = "email")
 	private String email;
 
-    @XmlElement
+	@XmlElement
 	@Column(name = "passwordHash")
 	private String passwordHash;
 
-    @XmlElement
+	@XmlElement
 	@Column(name = "isAdmin")
 	private Boolean isAdmin = false;
 
-    @XmlElement
+	@XmlElement
 	@Column(name = "finishedRegistration")
 	private Boolean finishedRegistration = false;
 
-    private transient String password;
+	private transient String password;
 
-    protected User() {
+	protected User() {
 		isAdmin = false;
 	}
 
-    /**
-     * Creates the user, this will hash the password using a sha hash. Get password
-     * will return the hashed password.
-     *
-     * @param username the username
-     * @param email users email
-     * @param password password that needs to be hashed
-     */
-	public User(final String username, final String email,
-			final String password) {
+	/**
+	 * Creates the user, this will hash the password using a sha hash. Get
+	 * password will return the hashed password.
+	 * 
+	 * @param username
+	 *            the username
+	 * @param email
+	 *            users email
+	 * @param password
+	 *            password that needs to be hashed
+	 */
+	public User(final String username, final String email, final String password) {
 		this.username = username;
 		this.email = email;
 		this.passwordHash = SecurityUtil.createSHAHash(password);
 	}
 
 	public boolean validatePassword(final String expectedPassword) {
-        if (expectedPassword != null && passwordHash.equals(SecurityUtil.createSHAHash(expectedPassword))) {
-            return true;
-        } else {
-          return false;
-        }
+		if (expectedPassword != null
+				&& passwordHash.equals(SecurityUtil
+						.createSHAHash(expectedPassword))) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	public String getPassword() {
+	public String getPasswordHash() {
 		return passwordHash;
 	}
 
 	public void setFinishedRegistration(final boolean finishedRegistration) {
 		this.finishedRegistration = finishedRegistration;
 	}
-    
-    public String getEmail(){
-        return email;
-    }
+
+	public String getEmail() {
+		return email;
+	}
 }
