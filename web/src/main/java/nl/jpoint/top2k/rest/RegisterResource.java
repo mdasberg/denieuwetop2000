@@ -43,13 +43,13 @@ public class RegisterResource {
 	@POST
 	@Path("/new")
 	@Transactional
-	public Response register(@FormParam("email") final String email,
+	public String register(@FormParam("email") final String email,
 			@FormParam("password") final String password) {
 
 		final User user = new User(email, email, password);
 		userService.create(user);
 		mailService.sendRegistrationMail(user);
-		return sendToHomePage();
+		return "Gelukt. Check email";
 	}
 
 	@GET

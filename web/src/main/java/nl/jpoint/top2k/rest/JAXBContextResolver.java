@@ -17,8 +17,7 @@ import javax.xml.bind.JAXBContext;
 @Provider
 public class JAXBContextResolver implements ContextResolver<JAXBContext> {
     private JAXBContext context;
-    @SuppressWarnings("rawtypes")
-	private Class[] types = {};
+    private Class[] types = {};
 
     /**
      * Default constructor.

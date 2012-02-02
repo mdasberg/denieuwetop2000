@@ -21,22 +21,26 @@
 					<fieldset>
 						<div>
 							<div class="userLabel">Email address:</div>
-							<input type="text" id="email" name="email" data-bind="event: { focus: clearErrors}, style : { backgroundColor : emailError() == '' ? 'white' : 'red' }">
+							<input type="text" id="email" name="email" data-bind="value: email, event: { focus: clearErrors}, style : { backgroundColor : emailError() ? 'red' : 'white' }">
+							<div id="registrationError" data-bind="style: { display: emailError()? 'block' : 'none'}">Geen correct email adres.</div>
 						</div>
 
 						<div id="passwordInfo">
 							<div class="userLabel">Paswoord:</div>
-							<input type="password" id="password" name="password" data-bind="event: { focus: clearErrors}, style : { backgroundColor : passwordFormatError() == '' && passwordEqualError() == '' ? 'white' : 'red' }">
+							<input type="password" id="password" name="password" data-bind="value: password, event: { focus: clearErrors}, style : { backgroundColor : passwordFormatError() || passwordEqualError() ? 'red' : 'white' }">
+							<div id="registrationError" data-bind="style: { display: passwordFormatError()? 'block' : 'none'}">Paswoord is te kort. Minimaal 5 karakters.</div>
+							<div id="registrationError" data-bind="style: { display: passwordEqualError()? 'block' : 'none'}">Paswoord velden niet gelijk.</div>
 						</div>
 
 						<div id="verifyPasswordInfo" style="display: none;">
 							<div class="userLabel">Herhaal Paswoord:</div>
-							<input id="verifyPassword" type="password" name="verifyPassword" data-bind="event: { focus: clearErrors}, style : { backgroundColor : passwordFormatError() == '' && passwordEqualError() == '' ? 'white' : 'red' }">
+							<input id="verifyPassword" type="password" name="verifyPassword" data-bind="event: { focus: clearErrors}, style : { backgroundColor : passwordFormatError() || passwordEqualError() ? 'red' : 'white' }">
 						</div>
 						<input type="button" id="login" value="Login" style="display: inline;">
 						<input type="button" id="register" value="Registeer" data-bind="click: toggleRegistration">
 						 <input type="button" id="send" value="Verzenden" data-bind="click: sendRegistration" style="display: none;">
 						<input type="button" id="cancel" value="Annuleren" data-bind="click: cancel" style="display: none;">
+						<div id="registrationResult"></div>
 					</fieldset>
 				</form>
 			</div>

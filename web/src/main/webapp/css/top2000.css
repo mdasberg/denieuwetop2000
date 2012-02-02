@@ -46,3 +46,13 @@ body {
 #userForm .userLabel {
 	text-align: left;
 }
+
+#userForm #registrationError {
+	color: red;
+	font-size: 8pt;
+}
+
+#userForm #registrationResult {
+	color: green;
+	font-size: 10pt;
+}"
