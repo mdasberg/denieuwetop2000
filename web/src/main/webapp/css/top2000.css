@@ -32,3 +32,17 @@ body {
     height: 50px;
     background-image:url('../img/footer.png');
 }
+
+#userForm {
+	background-color: #CECECE;
+	font-family: Arial;
+	color: #000;
+	border: 2px #80FF00 solid;
+	width: 170px;
+	padding: 20px;
+	text-align: center;
+}
+
+#userForm .userLabel {
+	text-align: left;
+}

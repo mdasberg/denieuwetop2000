@@ -7,43 +7,68 @@
 <link rel="stylesheet" href="css/960.css" />
 <link rel="stylesheet" href="css/top2000.css" />
 <link rel="stylesheet" href="css/960.css" />
+<script type="text/javascript" src="javascript/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="javascript/knockout-2.0.0.js"></script>
+<script type="text/javascript" src="javascript/top2000.js"></script>
 </head>
 <body>
-<div class="container_12 main">
-  <div class="grid_12 menu">
-	<img src="img/menu.png" alt="mockmenu"/>
-  </div>
-  <div class="clear"></div>
-  <div class="grid_12 header">
-	<img src="img/header.png" alt="de nieuwe top 2000"/>
-  </div>
-  <div class="clear"></div>
-  <div class="grid_5">
-    <div class="song">
-      Queen - Bohemian Rhapsody
-    </div>
-  </div>
-  <div class="grid_2">&nbsp;</div>
-  <div class="grid_5">
-    <div class="song">
-      The Beatles - Yellow Submarine
-    </div>
-  </div>
-  <div class="clear"></div>
-  <div class="grid_12 spacer">
-  </div>
-  <div class="clear"></div>
-  <div class="grid_4 vote">
-	<a href="#win1"><img src="img/win.png"></a>
-  </div>
-  <div class="grid_4 vote">
-	<a href="#tie"><img src="img/tie.png"></a>
-  </div>
-  <div class="grid_4 vote">
-	<a href="#win2"><img src="img/win.png"></a>
-  </div>
-  <div class="clear"></div>
-</div>
-<div class="container_12 footer">&nbsp;</div>
+	<div class="container_12 main">
+		<div class="grid_12 menu">
+			<img src="img/menu.png" alt="mockmenu" id="menu" data-bind="click: toggleLogin"/>
+			<div id="userForm"
+				style="display: none; position: absolute; left: 0px; top: 0px;">
+				<form>
+					<fieldset>
+						<div>
+							<div class="userLabel">Email address:</div>
+							<input type="text" id="email" name="email" data-bind="event: { focus: clearErrors}, style : { backgroundColor : emailError() == '' ? 'white' : 'red' }">
+						</div>
+
+						<div id="passwordInfo">
+							<div class="userLabel">Paswoord:</div>
+							<input type="password" id="password" name="password" data-bind="event: { focus: clearErrors}, style : { backgroundColor : passwordFormatError() == '' && passwordEqualError() == '' ? 'white' : 'red' }">
+						</div>
+
+						<div id="verifyPasswordInfo" style="display: none;">
+							<div class="userLabel">Herhaal Paswoord:</div>
+							<input id="verifyPassword" type="password" name="verifyPassword" data-bind="event: { focus: clearErrors}, style : { backgroundColor : passwordFormatError() == '' && passwordEqualError() == '' ? 'white' : 'red' }">
+						</div>
+						<input type="button" id="login" value="Login" style="display: inline;">
+						<input type="button" id="register" value="Registeer" data-bind="click: toggleRegistration">
+						 <input type="button" id="send" value="Verzenden" data-bind="click: sendRegistration" style="display: none;">
+						<input type="button" id="cancel" value="Annuleren" data-bind="click: cancel" style="display: none;">
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="grid_12 header">
+			<img src="img/header.png" alt="de nieuwe top 2000" />
+		</div>
+		<div class="clear"></div>
+		<div class="grid_5">
+			<div class="song">Queen - Bohemian Rhapsody</div>
+		</div>
+		<div class="grid_2">&nbsp;</div>
+		<div class="grid_5">
+			<div class="song">The Beatles - Yellow Submarine</div>
+		</div>
+		<div class="clear"></div>
+		<div class="grid_12 spacer"></div>
+		<div class="clear"></div>
+		<div class="grid_4 vote">
+			<a href="#win1"><img src="img/win.png"> </a>
+		</div>
+		<div class="grid_4 vote">
+			<a href="#tie"><img src="img/tie.png"> </a>
+		</div>
+		<div class="grid_4 vote">
+			<a href="#win2"><img src="img/win.png"> </a>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="container_12 footer">&nbsp;</div>
+
+
 </body>
 </html>
