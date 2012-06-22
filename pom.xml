@@ -15,6 +15,7 @@
     <modules>
         <module>web</module>
         <module>domain</module>
+        <module>test</module>
     </modules>
 
     <build>
@@ -47,6 +48,7 @@
         <junit.version>4.8.2</junit.version>
         <javax.mail.version>1.4.4</javax.mail.version>
         <commons.codec.version>1.6</commons.codec.version>
+        <mafia.version>1.0.7-SNAPSHOT</mafia.version>
     </properties>
 
     <dependencyManagement>
@@ -205,6 +207,11 @@
                 <artifactId>postgresql</artifactId>
                 <version>${postgresql.version}</version>
             </dependency>
+	        <dependency>
+    	        <groupId>nl.sijpesteijn.testing.fitnesse.plugins</groupId>
+        	    <artifactId>mafia-maven-plugin</artifactId>
+            	<version>${mafia.version}</version>
+        	</dependency>
         </dependencies>
     </dependencyManagement>
 
